@@ -1,0 +1,63 @@
+/* Ex 04 - Utilize uma lista para resolver o problema a seguir. Uma empresa paga seus
+vendedores com base em comissões. O vendedor recebe $200 por semana
+mais 9 por cento de suas vendas brutas daquela semana.
+Por exemplo, um vendedor que teve vendas brutas de $3000 em uma semana
+recebe $200 mais 9 por cento de $3000, ou seja, um total de $470.
+Escreva um programa (usando um array de contadores) que determine
+quantos vendedores receberam salários nos seguintes intervalos de valores:
+$200 - $299
+$300 - $399
+$400 - $499
+$500 - $599
+$600 - $699
+$700 - $799
+$800 - $899
+$900 - $999
+$1000 em diante
+*/
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> vendasBrutas = new ArrayList<>();
+        
+        // Leitura das vendas brutas dos vendedores
+        System.out.println("Digite as vendas brutas dos vendedores (digite -1 para encerrar):");
+        double vendaBruta = scanner.nextDouble();
+        while (vendaBruta != -1) {
+            vendasBrutas.add(vendaBruta);
+            vendaBruta = scanner.nextDouble();
+        }
+        
+        // Calculando o salário de cada vendedor e contando quantos estão em cada intervalo de salário
+        int[] intervalosSalario = new int[9]; // índice 0 representa o intervalo $200 - $299, índice 1 representa $300 - $399, e assim por diante
+        for (double venda : vendasBrutas) {
+            double salario = 200 + (0.09 * venda);
+            int indiceIntervalo = (int) ((salario - 200) / 100); // Calculando o índice do intervalo
+            if (indiceIntervalo < 0) {
+                indiceIntervalo = 0; // Se o salário for menor que $200, considera-se no intervalo $200 - $299
+            } else if (indiceIntervalo > 8) {
+                indiceIntervalo = 8; // Se o salário for maior que $1000, considera-se no intervalo $1000 em diante
+            }
+            intervalosSalario[indiceIntervalo]++;
+        }
+        
+        // Exibindo a quantidade de vendedores em cada intervalo de salário
+        int inicioIntervalo = 200;
+        for (int i = 0; i < intervalosSalario.length; i++) {
+            int fimIntervalo = inicioIntervalo + 99;
+            if (i == intervalosSalario.length - 1) {
+                System.out.println("$" + inicioIntervalo + " em diante: " + intervalosSalario[i] + " vendedor(es)");
+            } else {
+                System.out.println("$" + inicioIntervalo + " - $" + fimIntervalo + ": " + intervalosSalario[i] + " vendedor(es)");
+            }
+            inicioIntervalo += 100;
+        }
+    }
+}
+
+
+
