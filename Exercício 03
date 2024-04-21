@@ -1,0 +1,81 @@
+/* Ex 03 - Faça um programa que leia um número indeterminado de valores,
+correspondentes a notas, encerrando a entrada de dados quando for
+informado um valor igual a -1 (que não deve ser armazenado).
+Após esta entrada de dados, faça:
+Mostre a quantidade de valores que foram lidos;
+Exiba todos os valores na ordem em que foram informados, um ao lado do
+outro;
+Exiba todos os valores na ordem inversa à que foram informados, um abaixo
+do outro;
+Calcule e mostre a soma dos valores;
+Calcule e mostre a média dos valores;
+Calcule e mostre a quantidade de valores acima da média calculada;
+Calcule e mostre a quantidade de valores abaixo de sete;
+Encerre o programa com uma mensagem.
+*/ 
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Double> notas = new ArrayList<>();
+        
+        // Leitura das notas
+        System.out.println("Digite as notas (para encerrar, digite -1):");
+        double nota = scanner.nextDouble();
+        while (nota != -1) {
+            notas.add(nota);
+            nota = scanner.nextDouble();
+        }
+        
+        // Mostrando a quantidade de valores lidos
+        System.out.println("Quantidade de valores lidos: " + notas.size());
+        
+        // Exibindo todos os valores na ordem em que foram informados
+        System.out.print("Valores na ordem em que foram informados: ");
+        for (double n : notas) {
+            System.out.print(n + " ");
+        }
+        System.out.println();
+        
+        // Exibindo todos os valores na ordem inversa à que foram informados
+        System.out.println("Valores na ordem inversa:");
+        for (int i = notas.size() - 1; i >= 0; i--) {
+            System.out.println(notas.get(i));
+        }
+        
+        // Calculando e mostrando a soma dos valores
+        double soma = 0;
+        for (double n : notas) {
+            soma += n;
+        }
+        System.out.println("Soma dos valores: " + soma);
+        
+        // Calculando e mostrando a média dos valores
+        double media = soma / notas.size();
+        System.out.println("Média dos valores: " + media);
+        
+        // Calculando e mostrando a quantidade de valores acima da média
+        int acimaDaMedia = 0;
+        for (double n : notas) {
+            if (n > media) {
+                acimaDaMedia++;
+            }
+        }
+        System.out.println("Quantidade de valores acima da média: " + acimaDaMedia);
+        
+        // Calculando e mostrando a quantidade de valores abaixo de sete
+        int abaixoDeSete = 0;
+        for (double n : notas) {
+            if (n < 7) {
+                abaixoDeSete++;
+            }
+        }
+        System.out.println("Quantidade de valores abaixo de sete: " + abaixoDeSete);
+        
+        // Encerrando o programa com uma mensagem
+        System.out.println("Programa encerrado.");
+    }
+}
