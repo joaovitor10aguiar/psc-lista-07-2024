@@ -1,0 +1,53 @@
+/* Ex 02 - Utilizando listas faça um programa que faça 5 perguntas para uma pessoa
+sobre um crime. As perguntas são:
+"Telefonou para a vítima?"
+"Esteve no local do crime?"
+"Mora perto da vítima?"
+"Devia para a vítima?"
+"Já trabalhou com a vítima?"
+O programa deve no final emitir uma classificação sobre a participação da
+pessoa no crime. Se a pessoa responder positivamente a 2 questões ela deve
+ser classificada como "Suspeita", entre 3 e 4 como "Cúmplice" e 5 como
+"Assassino". Caso contrário, ele será classificado como "Inocente"
+*/
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        List<String> respostas = new ArrayList<>();
+        
+        System.out.println("Responda 'sim' ou 'nao' para as seguintes perguntas:");
+        System.out.print("Telefonou para a vítima? ");
+        respostas.add(scanner.nextLine().toLowerCase());
+        System.out.print("Esteve no local do crime? ");
+        respostas.add(scanner.nextLine().toLowerCase());
+        System.out.print("Mora perto da vítima? ");
+        respostas.add(scanner.nextLine().toLowerCase());
+        System.out.print("Devia para a vítima? ");
+        respostas.add(scanner.nextLine().toLowerCase());
+        System.out.print("Já trabalhou com a vítima? ");
+        respostas.add(scanner.nextLine().toLowerCase());
+        
+        // Contando respostas positivas
+        int respostasPositivas = 0;
+        for (String resposta : respostas) {
+            if (resposta.equals("sim")) {
+                respostasPositivas++;
+            }
+        }
+    
+        if (respostasPositivas == 2) {
+            System.out.println("Classificação: Suspeita");
+        } else if (respostasPositivas >= 3 && respostasPositivas <= 4) {
+            System.out.println("Classificação: Cúmplice");
+        } else if (respostasPositivas == 5) {
+            System.out.println("Classificação: Assassino");
+        } else {
+            System.out.println("Classificação: Inocente");
+        }
+    }
+}
